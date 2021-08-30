@@ -24,6 +24,11 @@
 // const fs = require('fs');
 // const mnemonic = fs.readFileSync(".secret").toString().trim();
 
+const path = require("path");
+require("dotenv").config({ path: "./.env" });
+const HDWalletProvider = require("@truffle/hdwallet-provider");
+const AccountIndex = 0;
+
 module.exports = {
   /**
    * Networks define how you connect to your ethereum client and let you set the
@@ -89,7 +94,7 @@ module.exports = {
   // Configure your compilers
   compilers: {
     solc: {
-      version: "^0.8.7", // Fetch exact version from solc-bin (default: truffle's version)
+      version: "^0.8.0", // Fetch exact version from solc-bin (default: truffle's version)
       // docker: true,        // Use "0.5.1" you've installed locally with docker (default: false)
       // settings: {          // See the solidity docs for advice about optimization and evmVersion
       //  optimizer: {
