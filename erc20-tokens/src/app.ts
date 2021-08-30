@@ -1,4 +1,4 @@
-import { Example } from "./example";
+const example = require("./example");
 
 //
-console.log(Example("cowabunga!"));
+console.log(example("cowabunga!"));

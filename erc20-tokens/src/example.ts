@@ -1,5 +1,5 @@
-const Example = (text: string) => {
+function Example(text: string) {
   return text;
-};
+}
 
-export { Example };
+module.exports = Example;

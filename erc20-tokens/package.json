@@ -8,7 +8,7 @@
   },
   "scripts": {
     "start": "webpack-dev-server",
-    "pack": "webpack",
+    "webpack": "webpack",
     "test": "jest --watchAll --verbose",
     "report": "jest --verbose --coverage"
   },
@@ -33,6 +33,7 @@
   },
   "jest": {
     "preset": "ts-jest",
-    "testEnvironment": "node"
+    "testEnvironment": "node",
+    "extensionsToTreatAsEsm": [".ts"]
   }
 }
