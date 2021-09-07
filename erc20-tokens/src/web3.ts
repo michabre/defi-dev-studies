@@ -5,7 +5,7 @@ const TokenOpenZeppelin = require("../build/contracts/TokenOpenZeppelin3.json");
 const Accounts = async () => {
   try {
     const web3 = await new Web3(currentProvider);
-    const accounts = await web3.eth.getAccounts();
+    const accounts: Array<string> = await web3.eth.getAccounts();
 
     // Get the contract instance.
     const networkId = await web3.eth.net.getId();
@@ -15,6 +15,7 @@ const Accounts = async () => {
       deployedNetwork && deployedNetwork.address
     );
 
+    console.log(networkId);
     console.log(instance);
     console.log(accounts);
   } catch (error) {
