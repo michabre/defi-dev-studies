@@ -1,4 +1,5 @@
 const path = require("path");
+const MiniCssExtractPlugin = require("mini-css-extract-plugin");
 const webpack = require("webpack");
 
 module.exports = {
@@ -16,6 +17,31 @@ module.exports = {
         use: "ts-loader",
         exclude: [/node_modules/, /test/],
       },
+      {
+        test: /\.css$/,
+        use: [
+          MiniCssExtractPlugin.loader,
+          {
+            loader: "css-loader",
+          },
+        ],
+      },
+      {
+        test: /\.scss$/,
+        use: [
+          MiniCssExtractPlugin.loader,
+          {
+            loader: "css-loader",
+          },
+          {
+            loader: "sass-loader",
+            options: {
+              sourceMap: true,
+              // options...
+            },
+          },
+        ],
+      },
     ],
   },
   plugins: [
@@ -23,15 +49,18 @@ module.exports = {
       process: "process/browser",
       Buffer: ["buffer", "Buffer"],
     }),
+    new MiniCssExtractPlugin({
+      filename: "styles.css",
+    }),
   ],
   resolve: {
     extensions: [".ts", ".js"],
     fallback: {
-      "os": require.resolve("os-browserify/browser"),
-      "stream": require.resolve("stream-browserify"),
-      "https": require.resolve("https-browserify"),
-      "http": require.resolve("stream-http"),
-      "crypto": require.resolve("crypto-browserify")
+      os: require.resolve("os-browserify/browser"),
+      stream: require.resolve("stream-browserify"),
+      https: require.resolve("https-browserify"),
+      http: require.resolve("stream-http"),
+      crypto: require.resolve("crypto-browserify"),
     },
   },
 };

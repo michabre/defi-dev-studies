@@ -1,6 +1,9 @@
 const example = require("./example");
 const accounts = require("./web3");
 
+// Styles
+import "./styles.css";
+
 //
 console.log(example("cowabunga!"));
 accounts();
