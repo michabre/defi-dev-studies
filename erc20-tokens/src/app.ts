@@ -1,15 +1,19 @@
-
 const tokens = require("./Tokens");
-const HockeyTokenContract = tokens();
-
 // Styles
 import "./styles.css";
 
-//
-function buttonHandler(event: Event): void {
-  event.preventDefault();
-  HockeyTokenContract.then((data: any) => data.testHandler(event));
-}
+const options: Options = {
+  adminButton: "get-admin",
+  allowanceButton: "get-allowance",
+  balanceOfButton: "get-balanceOf",
+  decimalsButton: "get-decimals",
+  nameButton: "get-name",
+  symbolButton: "get-symbol",
+  totalSupplyButton: "get-totalSupply",
+  listOfAccountsElement: "list-of-accounts",
+  // networkInfoElement: "network-information",
+  // otherElement: "other-information",
+  resultsElement: "results",
+};
 
-const adminButton = document.getElementById("get-admin")! as HTMLAnchorElement;
-adminButton.addEventListener("click", buttonHandler);
+tokens(options);
