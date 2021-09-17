@@ -1,6 +1,6 @@
 const Web3 = require("web3");
 
-const getWeb3 = () =>
+const getWeb3Module = () =>
   new Promise((resolve, reject) => {
     // Wait for loading completion to avoid race conditions with web3 injection timing.
     window.addEventListener("load", async () => {
@@ -9,7 +9,7 @@ const getWeb3 = () =>
         const web3 = new Web3(window.ethereum);
         try {
           // Request account access if needed
-          await window.ethereum.enable();
+          await window?.ethereum.enable();
           // Acccounts now exposed
           resolve(web3);
         } catch (error) {
@@ -35,4 +35,4 @@ const getWeb3 = () =>
     });
   });
 
-module.exports = getWeb3;
+module.exports = getWeb3Module;

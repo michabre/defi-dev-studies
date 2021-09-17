@@ -1,24 +1,6 @@
-const getWeb3 = require("./getWeb3");
-// const currentProvider = new Web3.providers.HttpProvider(
-//   "http://localhost:7545"
-// );
-
-// connecting to Ganache
+const getWeb3 = require("./getWeb3Module");
 const TokenOpenZeppelin = require("../build/contracts/TokenOpenZeppelin3.json");
-
-interface Options {
-  adminButton: string;
-  allowanceButton: string;
-  balanceOfButton: string;
-  decimalsButton: string;
-  nameButton: string;
-  symbolButton: string;
-  totalSupplyButton: string;
-  listOfAccountsElement: string;
-  // networkInfoElement: string;
-  // otherElement: string;
-  resultsElement: string;
-}
+import { Options } from "./interfaces/Options";
 
 const Tokens = async (options: Options) => {
   const {
@@ -51,7 +33,6 @@ const Tokens = async (options: Options) => {
   )! as HTMLElement;
 
   try {
-    //const web3 = await new Web3(currentProvider);
     const web3 = await getWeb3();
     accounts = await web3.eth.getAccounts();
 
@@ -64,25 +45,34 @@ const Tokens = async (options: Options) => {
     );
 
     contract = instance;
-
     console.log(networkId);
-    //console.log(instance);
 
     // Build Lists
     buildList(listOfAccountsElement, accounts);
 
     // Event Listeners
     adminBtn.addEventListener("click", () => {
-      getNetworkIdHandler(networkId);
+      getContractAdmin();
     });
-    allowanceBtn.addEventListener("click", () => {
-      testContract();
-    });
+
+    allowanceBtn.addEventListener("click", testHandler);
     balanceOfBtn.addEventListener("click", testHandler);
-    decimalsBtn.addEventListener("click", testHandler);
-    nameBtn.addEventListener("click", testHandler);
-    symbolBtn.addEventListener("click", testHandler);
-    totalSupplyBtn.addEventListener("click", testHandler);
+
+    decimalsBtn.addEventListener("click", () => {
+      getDecimals();
+    });
+
+    nameBtn.addEventListener("click", () => {
+      getTokenName();
+    });
+
+    symbolBtn.addEventListener("click", () => {
+      getSymbol();
+    });
+
+    totalSupplyBtn.addEventListener("click", () => {
+      getTotalSupply();
+    });
   } catch (error) {
     console.log("Error", error);
   }
@@ -91,19 +81,44 @@ const Tokens = async (options: Options) => {
     event.preventDefault();
     const target = event.target as HTMLDivElement;
     console.log(target.id);
-    updateResults("Message has been updated");
+    updateResults("Message", "Message has been updated");
   }
 
-  function getNetworkIdHandler(network: string): void {
-    console.log("network id: ", network);
-  }
+  //
+  const getContractAdmin = async () => {
+    const response = await contract.methods?.admin().call({
+      from: accounts[0],
+    });
+    updateResults("Contract Admin", response);
+  };
 
-  const testContract = async () => {
-    console.log("hello");
+  //
+  const getTokenName = async () => {
     const response = await contract.methods?.name().call({
       from: accounts[0],
     });
-    console.log(response);
+    updateResults("Token Name", response);
+  };
+
+  const getDecimals = async () => {
+    const response = await contract.methods?.decimals().call({
+      from: accounts[0],
+    });
+    updateResults("Decimals", response);
+  };
+
+  const getSymbol = async () => {
+    const response = await contract.methods?.symbol().call({
+      from: accounts[0],
+    });
+    updateResults("Symbol", response);
+  };
+
+  const getTotalSupply = async () => {
+    const response = await contract.methods?.totalSupply().call({
+      from: accounts[0],
+    });
+    updateResults("Total Supply", response);
   };
 
   function buildList(el: string, arr: Array<string>): void {
@@ -113,9 +128,9 @@ const Tokens = async (options: Options) => {
     });
   }
 
-  function updateResults(message: string): void {
+  function updateResults(topic: string, message: string): void {
     const results = document.getElementById(resultsElement)! as HTMLElement;
-    results.innerHTML = message;
+    results.innerHTML = `<b>${topic}</b>: ${message}`;
   }
 };
 

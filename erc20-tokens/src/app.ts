@@ -1,3 +1,10 @@
+declare global {
+  interface Window {
+    ethereum: any;
+    web3: any;
+  }
+}
+import { Options } from "./interfaces/Options";
 const tokens = require("./Tokens");
 // Styles
 import "./styles.css";

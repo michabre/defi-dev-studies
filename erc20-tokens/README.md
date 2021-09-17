@@ -35,3 +35,5 @@ truffle migrate --network ganache
 ## Further Reading
 
 - [HOW TO MOCK SOLIDITY SMART CONTRACTS FOR TESTING](https://ethereum.org/pl/developers/tutorials/how-to-mock-solidity-contracts-for-testing/)
+
+- [How to implement ERC20 supply mechanisms](https://forum.openzeppelin.com/t/how-to-implement-erc20-supply-mechanisms/226)
