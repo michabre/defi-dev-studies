@@ -12,7 +12,7 @@ const Tokens = async (options: Options) => {
     symbolButton,
     totalSupplyButton,
     listOfAccountsElement,
-    // networkInfoElement,
+    networkInfoElement,
     // otherElement,
     resultsElement,
   } = options;
@@ -32,6 +32,9 @@ const Tokens = async (options: Options) => {
     totalSupplyButton
   )! as HTMLElement;
 
+  // Transactions
+  const transferBtn = document.getElementById("get-transfer")! as HTMLElement;
+
   try {
     const web3 = await getWeb3();
     accounts = await web3.eth.getAccounts();
@@ -45,18 +48,23 @@ const Tokens = async (options: Options) => {
     );
 
     contract = instance;
-    console.log(networkId);
 
     // Build Lists
     buildList(listOfAccountsElement, accounts);
+    buildList(networkInfoElement, [networkId]);
 
     // Event Listeners
     adminBtn.addEventListener("click", () => {
       getContractAdmin();
     });
 
-    allowanceBtn.addEventListener("click", testHandler);
-    balanceOfBtn.addEventListener("click", testHandler);
+    allowanceBtn.addEventListener("click", () => {
+      getAllowance();
+    });
+
+    balanceOfBtn.addEventListener("click", () => {
+      getBalance();
+    });
 
     decimalsBtn.addEventListener("click", () => {
       getDecimals();
@@ -73,15 +81,13 @@ const Tokens = async (options: Options) => {
     totalSupplyBtn.addEventListener("click", () => {
       getTotalSupply();
     });
+
+    // Transactions
+    transferBtn.addEventListener("click", () => {
+      getTransfer();
+    });
   } catch (error) {
     console.log("Error", error);
-  }
-
-  function testHandler(event: Event): void {
-    event.preventDefault();
-    const target = event.target as HTMLDivElement;
-    console.log(target.id);
-    updateResults("Message", "Message has been updated");
   }
 
   //
@@ -90,6 +96,34 @@ const Tokens = async (options: Options) => {
       from: accounts[0],
     });
     updateResults("Contract Admin", response);
+  };
+
+  //
+  const getAllowance = async () => {
+    let owner = document.getElementById(
+      "get-allowance-owner"
+    ) as HTMLInputElement;
+    let spender = document.getElementById(
+      "get-allowance-spender"
+    ) as HTMLInputElement;
+
+    const response = await contract.methods
+      ?.allowance(owner.value, spender.value)
+      .call({
+        from: accounts[0],
+      });
+    updateResults("Allowance", response);
+  };
+
+  const getBalance = async () => {
+    let address = document.getElementById(
+      "get-balanceOf-address"
+    ) as HTMLInputElement;
+
+    const response = await contract.methods?.balanceOf(address.value).call({
+      from: accounts[0],
+    });
+    updateResults("Balance", response);
   };
 
   //
@@ -121,10 +155,27 @@ const Tokens = async (options: Options) => {
     updateResults("Total Supply", response);
   };
 
+  const getTransfer = async () => {
+    let spender = document.getElementById(
+      "get-transfer-spender"
+    ) as HTMLInputElement;
+    let amount = document.getElementById(
+      "get-transfer-amount"
+    ) as HTMLInputElement;
+
+    console.log(spender.value, amount.value);
+
+    const response = await contract.methods
+      ?.transfer(spender.value, amount.value)
+      .send({ from: accounts[0] });
+
+    updateResults("Transfer", response);
+  };
+
   function buildList(el: string, arr: Array<string>): void {
     const list = document.getElementById(el);
     arr.map((item, index) => {
-      list?.insertAdjacentHTML("afterend", `<li key="${index}">${item}</li>`);
+      list?.insertAdjacentHTML("beforeend", `<li key="${index}">${item}</li>`);
     });
   }
 

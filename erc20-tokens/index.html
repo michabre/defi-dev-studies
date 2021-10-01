@@ -25,7 +25,27 @@
 
     <div class="container is-fluid">
       <div class="columns">
-        <div class="column is-one-quarter">
+        <div class="column">
+          <div class="notification is-info">
+            <div class="columns">
+              <div class="column">
+                <h3 class="has-text-weight-semibold">Connected Account</h3>
+                <ul id="list-of-accounts"></ul>
+              </div>
+              <div class="column">
+                <h3 class="has-text-weight-semibold">Network Information</h3>
+                <ul id="network-information"></ul>
+              </div>
+              <div class="column">
+                <h3 class="has-text-weight-semibold">Other</h3>
+                <ul id="other-information"></ul>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="columns">
+        <div class="column is-one-third">
           <div class="notification is-info">
             <h2 class="title is-size-4">Public Methods</h2>
             <div class="field is-horizontal">
@@ -45,7 +65,20 @@
               <div class="field-label is-normal">
                 <label class="label">allowance</label>
               </div>
-              <div class="field-body">
+              <div class="field-body is-flex-direction-column">
+                <input
+                  id="get-allowance-owner"
+                  class="input mb-3"
+                  type="text"
+                  placeholder="Owner of Tokens"
+                />
+
+                <input
+                  id="get-allowance-spender"
+                  class="input mb-3"
+                  type="text"
+                  placeholder="Spender of Tokens"
+                />
                 <div class="field">
                   <p class="control is-expanded">
                     <a id="get-allowance" class="button">Call</a>
@@ -58,7 +91,14 @@
               <div class="field-label is-normal">
                 <label class="label">balanceOf</label>
               </div>
+
               <div class="field-body">
+                <input
+                  id="get-balanceOf-address"
+                  class="input mr-3"
+                  type="text"
+                  placeholder="Address"
+                />
                 <div class="field">
                   <p class="control is-expanded">
                     <a id="get-balanceOf" class="button">Call</a>
@@ -121,7 +161,7 @@
           </div>
         </div>
 
-        <div class="column is-one-quarter">
+        <div class="column is-one-third">
           <div class="notification is-warning">
             <h2 class="title is-size-4">Transaction Methods</h2>
 
@@ -181,10 +221,22 @@
               <div class="field-label is-normal">
                 <label class="label">transfer</label>
               </div>
-              <div class="field-body">
+              <div class="field-body is-flex-direction-column">
+                <input
+                  id="get-transfer-spender"
+                  class="input mb-3"
+                  type="text"
+                  placeholder="Spender of Tokens"
+                />
+                <input
+                  id="get-transfer-amount"
+                  class="input mb-3"
+                  type="text"
+                  placeholder="Amount of Tokens"
+                />
                 <div class="field">
                   <p class="control is-expanded">
-                    <a id="get-transfer" class="button">Button</a>
+                    <a id="get-transfer" class="button">Transact</a>
                   </p>
                 </div>
               </div>
@@ -205,7 +257,7 @@
           </div>
         </div>
 
-        <div class="column is-two-quarters">
+        <div class="column is-one-third">
           <div class="columns">
             <div class="column is-full">
               <!-- <progress class="progress is-small is-primary" max="100">
@@ -219,30 +271,6 @@
                       I am a very simple card. I am good at containing small
                       bits of information.
                     </p>
-                  </div>
-                </div>
-              </div>
-            </div>
-          </div>
-          <div class="columns">
-            <div class="column is-full">
-              <div class="columns">
-                <div class="column">
-                  <div class="notification is-link">
-                    <h3>List of Accounts</h3>
-                    <ul id="list-of-accounts"></ul>
-                  </div>
-                </div>
-                <div class="column">
-                  <div class="notification is-info">
-                    <h3>Network Information</h3>
-                    <ul id="network-information"></ul>
-                  </div>
-                </div>
-                <div class="column">
-                  <div class="notification is-success">
-                    <h3>Other</h3>
-                    <ul id="other-information"></ul>
                   </div>
                 </div>
               </div>

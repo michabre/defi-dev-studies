@@ -18,8 +18,7 @@ const options: Options = {
   symbolButton: "get-symbol",
   totalSupplyButton: "get-totalSupply",
   listOfAccountsElement: "list-of-accounts",
-  // networkInfoElement: "network-information",
-  // otherElement: "other-information",
+  networkInfoElement: "network-information",
   resultsElement: "results",
 };
 

@@ -7,7 +7,6 @@ export interface Options {
   symbolButton: string;
   totalSupplyButton: string;
   listOfAccountsElement: string;
-  // networkInfoElement: string;
-  // otherElement: string;
+  networkInfoElement: string;
   resultsElement: string;
 }
