@@ -1,5 +1,5 @@
 const getWeb3 = require("./getWeb3Module");
-const TokenOpenZeppelin = require("../build/contracts/TokenOpenZeppelin3.json");
+const BeachSideResort = require("../build/contracts/BeachSideResort.json");
 import { Options } from "./interfaces/Options";
 
 const Tokens = async (options: Options) => {
@@ -13,7 +13,6 @@ const Tokens = async (options: Options) => {
     totalSupplyButton,
     listOfAccountsElement,
     networkInfoElement,
-    // otherElement,
     resultsElement,
   } = options;
 
@@ -41,21 +40,34 @@ const Tokens = async (options: Options) => {
 
     // Get the contract instance.
     networkId = await web3.eth.net.getId();
-    const deployedNetwork = TokenOpenZeppelin.networks[networkId];
+    const deployedNetwork = BeachSideResort.networks[networkId];
     instance = new web3.eth.Contract(
-      TokenOpenZeppelin.abi,
+      BeachSideResort.abi,
       deployedNetwork && deployedNetwork.address
     );
 
     contract = instance;
+
+    console.log(contract);
 
     // Build Lists
     buildList(listOfAccountsElement, accounts);
     buildList(networkInfoElement, [networkId]);
 
     // Event Listeners
-    adminBtn.addEventListener("click", () => {
-      getContractAdmin();
+    adminBtn.addEventListener("click", async () => {
+      console.log('admin button clicked');
+      // const response = await contract.methods?.token().call({
+      //   from: accounts[0],
+      // });
+
+      const response = await contract.methods?.getTokenName().call({
+        from: accounts[0],
+      });
+
+      //
+      console.log(response);
+      //updateResults("Contract Admin", response);
     });
 
     allowanceBtn.addEventListener("click", () => {
@@ -92,12 +104,12 @@ const Tokens = async (options: Options) => {
   }
 
   //
-  const getContractAdmin = async () => {
-    const response = await contract.methods?.admin().call({
-      from: accounts[0],
-    });
-    updateResults("Contract Admin", response);
-  };
+  // const getContractAdmin = async () => {
+  //   const response = await contract.methods?.admin().call({
+  //     from: accounts[0],
+  //   });
+  //   updateResults("Contract Admin", response);
+  // };
 
   //
   const getAllowance = async () => {
