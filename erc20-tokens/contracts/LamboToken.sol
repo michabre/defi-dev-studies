@@ -3,6 +3,8 @@ pragma solidity ^0.8.0;
 
 import "@openzeppelin/contracts/token/ERC20/ERC20.sol";
 
-contract TokenOpenZeppelin1 is ERC20 {
-  constructor() ERC20('Token Name', 'TOKEN_TICKER') {}
+contract LamboToken is ERC20 {
+  constructor() ERC20('Lambo Token', 'LAM') {
+    _mint(msg.sender, 1000000);
+  }
 }

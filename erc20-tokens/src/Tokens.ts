@@ -86,6 +86,7 @@ const Tokens = async (options: Options) => {
     transferBtn.addEventListener("click", () => {
       getTransfer();
     });
+    
   } catch (error) {
     console.log("Error", error);
   }
