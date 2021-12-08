@@ -57,13 +57,25 @@ const Tokens = async (options: Options) => {
     // Event Listeners
     adminBtn.addEventListener("click", async () => {
       console.log('admin button clicked');
-      // const response = await contract.methods?.token().call({
-      //   from: accounts[0],
-      // });
-
-      const response = await contract.methods?.getTokenName().call({
+      const name = await contract.methods?.getTokenName().call({
         from: accounts[0],
       });
+      const symbol = await contract.methods?.getTokenSymbol().call({
+        from: accounts[0],
+      });
+      const decimals = await contract.methods?.getTokenDecimals().call({
+        from: accounts[0],
+      });
+      const supply = await contract.methods?.getTokenTotalSupply().call({
+        from: accounts[0],
+      });
+
+      let response = {
+        name,
+        symbol,
+        decimals,
+        supply
+      };
 
       //
       console.log(response);
