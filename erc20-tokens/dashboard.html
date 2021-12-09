@@ -1,0 +1,283 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>ERC20 Tokens Example</title>
+    <link rel="stylesheet" href="dist/styles.css" />
+    <script src="dist/bundle.js" defer></script>
+  </head>
+  <body>
+    <header>
+      <div class="columns">
+        <div class="column">
+          <div class="notification is-primary">
+            <h1 class="title">ERC20 Tokens App</h1>
+            <p class="subtitle">
+              Simple dApp that creates an ERC20 token and provides the admin an
+              interface to send those tokens to other addresses.
+            </p>
+          </div>
+        </div>
+      </div>
+    </header>
+
+    <div class="container is-fluid">
+      <div class="columns">
+        <div class="column">
+          <div class="notification is-info">
+            <div class="columns">
+              <div class="column">
+                <h3 class="has-text-weight-semibold">Connected Account</h3>
+                <ul id="list-of-accounts"></ul>
+              </div>
+              <div class="column">
+                <h3 class="has-text-weight-semibold">Network Information</h3>
+                <ul id="network-information"></ul>
+              </div>
+              <div class="column">
+                <h3 class="has-text-weight-semibold">Other</h3>
+                <ul id="other-information"></ul>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="columns">
+        <div class="column is-one-third">
+          <div class="notification is-info">
+            <h2 class="title is-size-4">Public Methods</h2>
+            <div class="field is-horizontal">
+              <div class="field-label is-normal">
+                <label class="label">admin</label>
+              </div>
+              <div class="field-body">
+                <div class="field">
+                  <p class="control is-expanded">
+                    <a id="get-admin" class="button">Call</a>
+                  </p>
+                </div>
+              </div>
+            </div>
+
+            <div class="field is-horizontal">
+              <div class="field-label is-normal">
+                <label class="label">allowance</label>
+              </div>
+              <div class="field-body is-flex-direction-column">
+                <input
+                  id="get-allowance-owner"
+                  class="input mb-3"
+                  type="text"
+                  placeholder="Owner of Tokens"
+                />
+
+                <input
+                  id="get-allowance-spender"
+                  class="input mb-3"
+                  type="text"
+                  placeholder="Spender of Tokens"
+                />
+                <div class="field">
+                  <p class="control is-expanded">
+                    <a id="get-allowance" class="button">Call</a>
+                  </p>
+                </div>
+              </div>
+            </div>
+
+            <div class="field is-horizontal">
+              <div class="field-label is-normal">
+                <label class="label">balanceOf</label>
+              </div>
+
+              <div class="field-body">
+                <input
+                  id="get-balanceOf-address"
+                  class="input mr-3"
+                  type="text"
+                  placeholder="Address"
+                />
+                <div class="field">
+                  <p class="control is-expanded">
+                    <a id="get-balanceOf" class="button">Call</a>
+                  </p>
+                </div>
+              </div>
+            </div>
+
+            <div class="field is-horizontal">
+              <div class="field-label is-normal">
+                <label class="label">decimals</label>
+              </div>
+              <div class="field-body">
+                <div class="field">
+                  <p class="control is-expanded">
+                    <a id="get-decimals" class="button">Call</a>
+                  </p>
+                </div>
+              </div>
+            </div>
+
+            <div class="field is-horizontal">
+              <div class="field-label is-normal">
+                <label class="label">name</label>
+              </div>
+              <div class="field-body">
+                <div class="field">
+                  <p class="control is-expanded">
+                    <a id="get-name" class="button">Call</a>
+                  </p>
+                </div>
+              </div>
+            </div>
+
+            <div class="field is-horizontal">
+              <div class="field-label is-normal">
+                <label class="label">symbol</label>
+              </div>
+              <div class="field-body">
+                <div class="field">
+                  <p class="control is-expanded">
+                    <a id="get-symbol" class="button">Call</a>
+                  </p>
+                </div>
+              </div>
+            </div>
+
+            <div class="field is-horizontal">
+              <div class="field-label is-normal">
+                <label class="label">totalSupply</label>
+              </div>
+              <div class="field-body">
+                <div class="field">
+                  <p class="control is-expanded">
+                    <a id="get-totalSupply" class="button">Call</a>
+                  </p>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <div class="column is-one-third">
+          <div class="notification is-warning">
+            <h2 class="title is-size-4">Transaction Methods</h2>
+
+            <div class="field is-horizontal">
+              <div class="field-label is-normal">
+                <label class="label">approve</label>
+              </div>
+              <div class="field-body">
+                <div class="field">
+                  <p class="control is-expanded">
+                    <a id="get-approve" class="button">Button</a>
+                  </p>
+                </div>
+              </div>
+            </div>
+
+            <div class="field is-horizontal">
+              <div class="field-label is-normal">
+                <label class="label">decreaseAllowance</label>
+              </div>
+              <div class="field-body">
+                <div class="field">
+                  <p class="control is-expanded">
+                    <a id="get-decreaseAllowance" class="button">Button</a>
+                  </p>
+                </div>
+              </div>
+            </div>
+
+            <div class="field is-horizontal">
+              <div class="field-label is-normal">
+                <label class="label">increaseAllowance</label>
+              </div>
+              <div class="field-body">
+                <div class="field">
+                  <p class="control is-expanded">
+                    <a id="get-increaseAllowance" class="button">Button</a>
+                  </p>
+                </div>
+              </div>
+            </div>
+
+            <div class="field is-horizontal">
+              <div class="field-label is-normal">
+                <label class="label">mint</label>
+              </div>
+              <div class="field-body">
+                <div class="field">
+                  <p class="control is-expanded">
+                    <a id="get-mint" class="button">Button</a>
+                  </p>
+                </div>
+              </div>
+            </div>
+
+            <div class="field is-horizontal">
+              <div class="field-label is-normal">
+                <label class="label">transfer</label>
+              </div>
+              <div class="field-body is-flex-direction-column">
+                <input
+                  id="get-transfer-spender"
+                  class="input mb-3"
+                  type="text"
+                  placeholder="Spender of Tokens"
+                />
+                <input
+                  id="get-transfer-amount"
+                  class="input mb-3"
+                  type="text"
+                  placeholder="Amount of Tokens"
+                />
+                <div class="field">
+                  <p class="control is-expanded">
+                    <a id="get-transfer" class="button">Transact</a>
+                  </p>
+                </div>
+              </div>
+            </div>
+
+            <div class="field is-horizontal">
+              <div class="field-label is-normal">
+                <label class="label">transferFrom</label>
+              </div>
+              <div class="field-body">
+                <div class="field">
+                  <p class="control is-expanded">
+                    <a id="get-transferFrom" class="button">Button</a>
+                  </p>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <div class="column is-one-third">
+          <div class="columns">
+            <div class="column is-full">
+              <!-- <progress class="progress is-small is-primary" max="100">
+                15%
+              </progress> -->
+              <div class="card">
+                <div class="card-content white-text">
+                  <h3 class="card-title is-size-3">Results</h3>
+                  <div id="results">
+                    <p>
+                      I am a very simple card. I am good at containing small
+                      bits of information.
+                    </p>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </body>
+</html>
