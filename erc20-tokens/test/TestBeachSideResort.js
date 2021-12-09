@@ -54,7 +54,9 @@ contract("TestBeachSideResort", function (accounts) {
     return assert.equal(supply.toNumber(), 1000000);
   });
 
+  // test.todo("The owner transfers tokens to user1.");
+  // test.todo("user1 attempts to mint tokens and fails.");
+  // test.todo("The owners whitelists user1 so they can mint.");
+  // test.todo("user1 transfer tokens to user2.");
 
 });
-
-// 63 961 640 5010
